@@ -30,6 +30,8 @@
                   type="button"
                   class="day-dot"
                   :class="{ completed: day.completed }"
+                  :aria-pressed="day.completed ? 'true' : 'false'"
+                  :aria-label="`${habit.name} for ${formatAccessibleDate(day.date)}: ${day.completed ? 'completed' : 'not completed'}`"
                   @click="toggleDay(habit.id, day.id)"
                 >
                   {{ day.date }}
@@ -112,6 +114,18 @@ function toggleDay(habitId: number, dayId: string) {
   if (!day) return
 
   day.completed = !day.completed
+}
+
+// Helper function to format date for screen readers
+function formatAccessibleDate(date: Date): string {
+  const d = new Date(date)
+
+  return d.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
 }
 </script>
 
