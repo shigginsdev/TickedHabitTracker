@@ -117,7 +117,7 @@ function toggleDay(habitId: number, dayId: string) {
 }
 
 // Helper function to format date for screen readers
-function formatAccessibleDate(date: Date): string {
+function formatAccessibleDate(date: string | number | Date): string {
   const d = new Date(date)
 
   return d.toLocaleDateString('en-US', {
